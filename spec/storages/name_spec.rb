@@ -122,4 +122,18 @@ RSpec.describe FactorySettings::Storages::Name do
       end
     end
   end
+
+  describe "#reset!" do 
+    before { File.write(storage_path, { test: true }.to_yaml) }
+
+    it "removes storage file from disk" do 
+      subject.reset!
+      expect(File.file?(storage_path)).to be_falsey
+    end
+
+    it "clears inmemory storage" do 
+      subject.reset!
+      expect(subject.instance_variable_get("@storage")).to be_empty
+    end
+  end
 end

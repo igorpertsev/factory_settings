@@ -34,6 +34,13 @@ module FactorySettings
       def remove(key)
         with_storage_access { @storage.delete(key.to_sym) }
       end
+
+      def reset!
+        ::FactorySettings.storage_mutex.synchronize do 
+          File.delete(STORAGE_FILE_PATH) if File.file?(STORAGE_FILE_PATH)
+          @storage = {}
+        end
+      end
       
       private 
 
