@@ -22,7 +22,7 @@ module FactorySettings
 
       def add!(key)
         with_storage_access do 
-          raise AlreadyExists, "Robot with such name already exists" if exists?(key)
+          raise AlreadyExists, "Robot with such name already exists" if @storage.key?(key.to_sym)
           @storage[key.to_sym] = true
         end
       end
@@ -40,13 +40,14 @@ module FactorySettings
       def with_storage_access(ignore_persist = false)
         ::FactorySettings.storage_mutex.synchronize do 
           read_storage_content
-          yield
+          result = yield
           persist_change unless ignore_persist
+          result
         end  
       end
 
       def read_storage_content
-        @storage = File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : @storage
+        @storage = File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : {}
       end
       
       def persist_change

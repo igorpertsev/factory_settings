@@ -11,7 +11,7 @@ module FactorySettings
 
     def config
       yield self
-      validate_name_storage
+      validate_name_storage if @name_storage
     end
 
     def file_storage_path
@@ -29,7 +29,7 @@ module FactorySettings
     def validate_name_storage
       missing_methods = []
       missing_methods << :exists? unless @name_storage.respond_to?(:exists?)
-      missing_methods << :add unless @name_storage.respond_to?(:add)
+      missing_methods << :add! unless @name_storage.respond_to?(:add!)
       missing_methods << :remove unless @name_storage.respond_to?(:remove)
 
       rollback_storage(missing_methods) if missing_methods.size > 0

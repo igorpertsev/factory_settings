@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "factory_settings"
+require "factory_settings/name/generator"
+require "factory_settings/storages/name"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
