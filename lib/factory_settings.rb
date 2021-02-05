@@ -22,6 +22,10 @@ module FactorySettings
       @name_storage || ::FactorySettings::Storages::Name.instance
     end
 
+    def storage_mutex
+      @storage_mutex ||= Mutex.new
+    end
+
     def validate_name_storage
       missing_methods = []
       missing_methods << :exists? unless @name_storage.respond_to?(:exists?)
