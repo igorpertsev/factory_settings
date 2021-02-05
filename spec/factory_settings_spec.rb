@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'ostruct'
+
 RSpec.describe FactorySettings do
   it "has a version number" do
     expect(FactorySettings::VERSION).not_to be nil
