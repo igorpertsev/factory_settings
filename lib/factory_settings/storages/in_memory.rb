@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'base'
+require_relative "base"
 
 module FactorySettings
   module Storages
+    # In memory storage class. Only stores data in memory and resets all on application restart.
     class InMemory < Base
-
       def initialize
+        super
         @storage = {}
       end
 
@@ -15,8 +16,9 @@ module FactorySettings
       end
 
       def add!(key)
-        with_synchronize do 
+        with_synchronize do
           raise AlreadyExists, "Robot with such name already exists" if @storage.key?(key.to_sym)
+
           @storage[key.to_sym] = true
         end
       end
@@ -32,14 +34,12 @@ module FactorySettings
       def reset!
         with_synchronize { @storage = {} }
       end
-      
-      private 
 
-      def with_synchronize
-        ::FactorySettings.storage_mutex.synchronize do 
-          yield
-        end  
+      private
+
+      def with_synchronize(&block)
+        ::FactorySettings.storage_mutex.synchronize(&block)
       end
-    end 
+    end
   end
 end

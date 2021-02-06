@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-require 'singleton'
+require "singleton"
 
 module FactorySettings
   module Storages
+    # Base class for storages. Implement interface for other storage classes.
+    # Also implements singleton logic.
     class Base
       include Singleton
 
@@ -28,6 +30,6 @@ module FactorySettings
       def reset!
         raise NotImplementedError
       end
-    end 
+    end
   end
 end
