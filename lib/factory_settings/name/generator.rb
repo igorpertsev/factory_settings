@@ -6,6 +6,7 @@ module FactorySettings
   module Name
     class Generator 
       CHARS_SET = ('A'..'Z').to_a.freeze
+      SYMBOLIC_PART_LENGTH = 2 
       NUMERIC_LIMIT = 999
       NUMERIC_LIMIT_LENGTH = NUMERIC_LIMIT.to_s.size
 
@@ -15,7 +16,7 @@ module FactorySettings
         end
 
         def symbolic_part
-          CHARS_SET.sample(2).join
+          CHARS_SET.sample(SYMBOLIC_PART_LENGTH).join
         end
     
         def integer_part

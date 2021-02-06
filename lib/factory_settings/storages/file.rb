@@ -5,7 +5,7 @@ require 'yaml'
 
 module FactorySettings
   module Storages
-    class Name
+    class File
       include Singleton
 
       class AlreadyExists < StandardError; end
@@ -13,7 +13,7 @@ module FactorySettings
       STORAGE_FILE_PATH = "#{::FactorySettings.file_storage_path}/name_storage.yml".freeze
       
       def initialize
-        @storage = File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : {}
+        @storage = ::File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : {}
       end
 
       def exists?(key)
@@ -37,7 +37,7 @@ module FactorySettings
 
       def reset!
         ::FactorySettings.storage_mutex.synchronize do 
-          File.delete(STORAGE_FILE_PATH) if File.file?(STORAGE_FILE_PATH)
+          ::File.delete(STORAGE_FILE_PATH) if ::File.file?(STORAGE_FILE_PATH)
           @storage = {}
         end
       end
@@ -54,11 +54,11 @@ module FactorySettings
       end
 
       def read_storage_content
-        @storage = File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : {}
+        @storage = ::File.file?(STORAGE_FILE_PATH) ? YAML.load_file(STORAGE_FILE_PATH) : {}
       end
       
       def persist_change
-        File.write(STORAGE_FILE_PATH, @storage.to_yaml)
+        ::File.write(STORAGE_FILE_PATH, @storage.to_yaml)
       end
     end 
   end

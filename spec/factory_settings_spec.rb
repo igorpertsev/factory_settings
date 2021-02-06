@@ -30,13 +30,13 @@ RSpec.describe FactorySettings do
       end 
 
       it "use FactorySettings::Storages::Name class instance" do 
-        instance = FactorySettings::Storages::Name.instance
+        instance = FactorySettings::Storages::File.instance
         expect(described_class.name_storage).to eq(instance)
       end 
 
       context "passing storage in configs" do 
         context "invalid storages" do 
-          let(:instance) { FactorySettings::Storages::Name.instance }
+          let(:instance) { FactorySettings::Storages::File.instance }
 
           it "validates :add! method presence and rollbacks to default" do 
             message = "Name storage should implement [:add!]"

@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-RSpec.describe FactorySettings::Storages::Name do
+RSpec.describe FactorySettings::Storages::File do
   subject { described_class.instance }
 
   let(:path) { File.join((File.dirname __dir__), "tmp") }

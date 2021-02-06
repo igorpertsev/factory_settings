@@ -19,7 +19,7 @@ module FactorySettings
     end
     
     def name_storage 
-      @name_storage || ::FactorySettings::Storages::Name.instance
+      @name_storage || ::FactorySettings::Storages::File.instance
     end
 
     def storage_mutex
