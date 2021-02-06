@@ -13,6 +13,7 @@ RSpec.describe FactorySettings::Storages::File do
   describe "interface" do 
     it { is_expected.to respond_to(:exists?) }
     it { is_expected.to respond_to(:add!) }
+    it { is_expected.to respond_to(:add) }
     it { is_expected.to respond_to(:remove) }
   end
 

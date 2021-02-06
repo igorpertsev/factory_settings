@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-require 'singleton'
 require 'yaml'
+require_relative 'base'
 
 module FactorySettings
   module Storages
-    class File
-      include Singleton
-
-      class AlreadyExists < StandardError; end
-
+    class File < Base
       STORAGE_FILE_PATH = "#{::FactorySettings.file_storage_path}/name_storage.yml".freeze
       
       def initialize

@@ -3,6 +3,8 @@
 require "factory_settings"
 require "factory_settings/name/generator"
 require "factory_settings/storages/file"
+require "factory_settings/storages/in_memory"
+require "factory_settings/storages/base"
 require "factory_settings/robot"
 
 RSpec.configure do |config|
