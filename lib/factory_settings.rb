@@ -13,10 +13,11 @@ require_relative "factory_settings/version"
 #         Path to directory where default File storage will persist it's data
 module FactorySettings
   class Error < StandardError; end
-
   class InvalidNameStorageValue < StandardError; end
 
   class << self
+    attr_writer :name_storage, :file_storage_path
+    
     def config
       yield self
       validate_name_storage if @name_storage
